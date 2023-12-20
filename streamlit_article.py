@@ -43,16 +43,8 @@ def main():
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
         process = st.button("Process")
     if process:
-        if 'OPENAI_API_KEY' in st.secrets:
-            st.success('API 키가 이미 제공되었습니다!', icon='✅')
-            openai.api_key = st.secrets['OPENAI_API_KEY']
-        else:
-            openai.api_key = st.text_input('OpenAI API 토큰을 입력하세요.:', type='password')
-            if not (openai.api_key.startswith('sk-') and len(openai.api_key)==51):
-                st.warning('귀하의 자격 증명을 입력해주세요.!', icon='⚠️')
-            else:
-                st.success('프롬프트 메시지 입력을 진행해주세요!', icon='👉')
-                st.stop()
+        st.info("OpenAI API key를 입력해주세요.")
+            st.stop()
         files_text = get_text(uploaded_files)
         text_chunks = get_text_chunks(files_text)
         vetorestore = get_vectorstore(text_chunks)
